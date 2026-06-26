@@ -1,7 +1,7 @@
 # Configuration Guide
 
 Urocissa uses `config.toml` for application configuration. The config file
-location is determined at startup by the `UROCISSA_CONFIG_HOME` environment
+location is determined at startup by the `PICASU_CONFIG_HOME` environment
 variable or the platform default (see [Storage locations](#storage-locations)).
 
 If `config.toml` does not exist, it is automatically created with defaults
@@ -16,8 +16,8 @@ port = 5673
 max_upload_size = "100MiB"
 
 [gallery]
-data_home = "/home/user/.local/share/urocissa"
-image_home = "/home/user/.local/share/urocissa/images"
+data_home = "/home/user/.local/share/picasu"
+image_home = "/home/user/.local/share/picasu/images"
 upload_folder = "uploads"
 read_only_mode = false
 disable_img = false
@@ -42,8 +42,8 @@ Gallery application settings.
 
 | Key              | Type           | Default                    | Description                                                                                                                                                                                                                       |
 | ---------------- | -------------- | -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `data_home`      | string \| null | _resolved at first launch_ | Absolute path holding `db/`, `object/`, etc. Set automatically from `UROCISSA_DATA_HOME` or platform default. Stored so the runtime path is consistent regardless of env var changes.                                             |
-| `image_home`     | string \| null | _resolved at first launch_ | Single root directory the backend watches for new or changed media files. Set from `UROCISSA_IMAGE_HOME` or defaults to `<data_home>/images`. Read-only from the frontend — configure via env var or edit `config.toml` directly. |
+| `data_home`      | string \| null | _resolved at first launch_ | Absolute path holding `db/`, `object/`, etc. Set automatically from `PICASU_DATA_HOME` or platform default. Stored so the runtime path is consistent regardless of env var changes.                                             |
+| `image_home`     | string \| null | _resolved at first launch_ | Single root directory the backend watches for new or changed media files. Set from `PICASU_IMAGE_HOME` or defaults to `<data_home>/images`. Read-only from the frontend — configure via env var or edit `config.toml` directly. |
 | `upload_folder`  | string         | `uploads`                  | Subfolder name (relative to `image_home`) that uploads with no target album land in.                                                                                                                                              |
 | `read_only_mode` | boolean        | `false`                    | If `true`, the gallery runs in read-only mode — uploads, edits, and deletions are disabled.                                                                                                                                       |
 | `disable_img`    | boolean        | `false`                    | Disables image processing in the frontend. Intended for debugging only.                                                                                                                                                           |
@@ -59,7 +59,7 @@ Sensitive authentication and notification credentials. Only present when configu
 
 > **`data_home`** and **`image_home`** are resolved on first launch from
 > environment variables or defaults and written to `config.toml`. On
-> subsequent launches, `UROCISSA_DATA_HOME` and `UROCISSA_IMAGE_HOME` env
+> subsequent launches, `PICASU_DATA_HOME` and `PICASU_IMAGE_HOME` env
 > vars still override the stored value (they are checked every startup).
 
 ### Backfilling pre-existing files
@@ -78,16 +78,16 @@ directory > working directory (last resort)**.
 
 | Root   | Env var                | Holds                             | Default when unset                                          |
 | ------ | ---------------------- | --------------------------------- | ----------------------------------------------------------- |
-| Config | `UROCISSA_CONFIG_HOME` | `config.toml`                     | platform config dir (e.g. `~/.config/urocissa` on Linux)    |
-| Data   | `UROCISSA_DATA_HOME`   | `db/`, `object/`, `index_v5.redb` | platform data dir (e.g. `~/.local/share/urocissa` on Linux) |
-| Image  | `UROCISSA_IMAGE_HOME`  | base for `image_home` if unset    | `<data dir>/images`                                         |
+| Config | `PICASU_CONFIG_HOME` | `config.toml`                     | platform config dir (e.g. `~/.config/picasu` on Linux)    |
+| Data   | `PICASU_DATA_HOME`   | `db/`, `object/`, `index_v5.redb` | platform data dir (e.g. `~/.local/share/picasu` on Linux) |
+| Image  | `PICASU_IMAGE_HOME`  | base for `image_home` if unset    | `<data dir>/images`                                         |
 
 The platform config/data dirs come from the `directories` crate, which
 already honors `$XDG_CONFIG_HOME`/`$XDG_DATA_HOME` on Linux and the platform
 equivalents on Windows/macOS.
 
 ```sh
-UROCISSA_CONFIG_HOME=/etc/urocissa UROCISSA_DATA_HOME=/var/lib/urocissa UROCISSA_IMAGE_HOME=/mnt/photos ./urocissa
+PICASU_CONFIG_HOME=/etc/picasu PICASU_DATA_HOME=/var/lib/picasu PICASU_IMAGE_HOME=/mnt/photos ./picasu
 ```
 
 **Legacy single-folder layout:** if `./config.toml`
@@ -100,15 +100,15 @@ The following env vars override the config file on every launch:
 
 | Variable                   | Overrides                |
 | -------------------------- | ------------------------ |
-| `UROCISSA_ADDRESS`         | `server.address`         |
-| `UROCISSA_MAX_UPLOAD_SIZE` | `server.max_upload_size` |
-| `UROCISSA_PORT`            | `server.port`            |
-| `UROCISSA_DATA_HOME`       | `gallery.data_home`      |
-| `UROCISSA_DISABLE_IMG`     | `gallery.disable_img`    |
-| `UROCISSA_IMAGE_HOME`      | `gallery.image_home`     |
-| `UROCISSA_READ_ONLY_MODE`  | `gallery.read_only_mode` |
-| `UROCISSA_UPLOAD_FOLDER`   | `gallery.upload_folder`  |
-| `UROCISSA_AUTH_KEY`        | `secrets.auth_key`       |
+| `PICASU_ADDRESS`         | `server.address`         |
+| `PICASU_MAX_UPLOAD_SIZE` | `server.max_upload_size` |
+| `PICASU_PORT`            | `server.port`            |
+| `PICASU_DATA_HOME`       | `gallery.data_home`      |
+| `PICASU_DISABLE_IMG`     | `gallery.disable_img`    |
+| `PICASU_IMAGE_HOME`      | `gallery.image_home`     |
+| `PICASU_READ_ONLY_MODE`  | `gallery.read_only_mode` |
+| `PICASU_UPLOAD_FOLDER`   | `gallery.upload_folder`  |
+| `PICASU_AUTH_KEY`        | `secrets.auth_key`       |
 
 ## Advanced: Rocket configuration
 

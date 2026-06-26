@@ -1,14 +1,14 @@
 ## Build from Source (Linux Version)
 
-Follow these steps to set up and run the Urocissa app on Linux-based systems. For instructions on setting up the app on Windows, please refer to [this guide](WINDOWS.md).
+Follow these steps to set up and run the Picasu app on Linux-based systems. 
 
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/hsa00000/urocissa.git
+git clone <your-picasu-repo-url>
 ```
 
-This will create a folder called `./urocissa`.
+This will create a folder called `./picasu`.
 
 ---
 
@@ -43,7 +43,7 @@ Make sure the following software is installed on your system:
 
 ### 3. Build the Frontend
 
-In the `gallery-frontend` directory, run:
+In the `frontend` directory, run:
 
 ```bash
 npm run build
@@ -53,7 +53,7 @@ npm run build
 
 ### 4. Run the Application
 
-Navigate to the `gallery-backend` directory and run the following command to start the app:
+Navigate to the `server` directory and run the following command to start the app:
 
 ```bash
 cargo run --release
@@ -77,10 +77,10 @@ git pull
 
 ### Rebuild the Frontend
 
-1. Navigate to the `gallery-frontend` directory:
+1. Navigate to the `frontend` directory:
 
    ```bash
-   cd ./urocissa/gallery-frontend
+   cd ./picasu/frontend
    ```
 
 2. Build the frontend:
@@ -91,10 +91,10 @@ git pull
 
 ### Rebuild the Backend
 
-1. Navigate to the `gallery-backend` directory:
+1. Navigate to the `server` directory:
 
    ```bash
-   cd ./urocissa/gallery-backend
+   cd ./picasu/server
    ```
 
 2. Build and run the backend using Cargo:
@@ -103,4 +103,4 @@ git pull
    cargo run --release
    ```
 
-After following these steps, your Urocissa app will be updated to the latest version.
+After following these steps, your Picasu app will be updated to the latest version.

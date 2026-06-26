@@ -70,8 +70,8 @@ rewritten, as long as ARIA roles and accessible names are preserved.
 ### Prerequisites
 
 > **Important:** The E2E test does **not** use Vite's dev server. The backend
-> binary (`urocissa`) serves the production build of the frontend directly
-> from `gallery-frontend/dist/`. You must run `npm run build` before running
+> binary (`picasu`) serves the production build of the frontend directly
+> from `frontend/dist/`. You must run `npm run build` before running
 > tests. See the pipeline diagram above.
 
 The backend must be built, and the frontend must be built to `dist/` — the
@@ -79,14 +79,14 @@ e2e test does not use Vite's dev server. Playwright browsers must be
 installed:
 
 ```sh
-cd gallery-backend && cargo build
-cd gallery-frontend && npm run build && npx playwright install chromium
+cd server && cargo build
+cd frontend && npm run build && npx playwright install chromium
 ```
 
 ### Run
 
 ```sh
-cd gallery-frontend
+cd frontend
 npx playwright test --grep "UI scenarios"
 ```
 
